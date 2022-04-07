@@ -22,6 +22,9 @@ export const App = defineComponent({
             <li>
               <RouterLink to="/about">About</RouterLink>
             </li>
+            <li>
+              <RouterLink to="/welcome">Welcome</RouterLink>
+            </li>
           </ul>
         </header>
         <RouterView />
