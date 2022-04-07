@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue'
+import { RouterView } from 'vue-router'
 export const First = defineComponent({
   setup(props, context) {
     return () => (
-      <div>
-        <h1>First</h1>
-      </div>
+      <>
+        <div>First</div>
+      </>
     )
   },
 })

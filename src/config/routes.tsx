@@ -2,10 +2,10 @@ import { Home } from '../views/Home'
 import { About } from '../views/About'
 import { Welcome } from '../views/Welcome'
 import { RouteRecordRaw } from 'vue-router'
-import { First } from '../components/first'
-import { Second } from '../components/second'
-import { Third } from '../components/third'
-import { Forth } from '../components/forth'
+import { First } from '../components/welcome/first'
+import { Second } from '../components/welcome/Second'
+import { Third } from '../components/welcome/third'
+import { Forth } from '../components/welcome/forth'
 
 export const routes: RouteRecordRaw[] = [
   { path: '/', component: Home },
