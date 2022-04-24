@@ -1,5 +1,3 @@
-import { Home } from '../views/Home'
-import { About } from '../views/About'
 import { Welcome } from '../views/Welcome'
 import { RouteRecordRaw } from 'vue-router'
 import { First } from '../components/welcome/First'
@@ -8,8 +6,7 @@ import { Third } from '../components/welcome/Third'
 import { Fourth } from '../components/welcome/Fourth'
 
 export const routes: RouteRecordRaw[] = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
+  { path: '/', redirect: '/welcome/' },
   {
     path: '/welcome/',
     component: Welcome,
