@@ -1,8 +1,9 @@
 import s from './Welcome.module.scss'
-import pig from '../../assets/icons/pig.svg'
 export const First = () => (
   <div class={s.card}>
-    <img src={pig} alt="pig" />
+    <svg>
+      <use xlinkHref="#pig"></use>
+    </svg>
     <h2>
       会赚钱
       <br />

@@ -1,8 +1,9 @@
 import s from './Welcome.module.scss'
-import cloud from '../../assets/icons/cloud.svg'
 export const Fourth = () => (
   <div class={s.card}>
-    <img src={cloud} alt="cloud" />
+    <svg>
+      <use xlinkHref="#cloud"></use>
+    </svg>
     <h2>
       云备份
       <br />

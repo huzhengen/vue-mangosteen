@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "sass": "^1.49.11",
+    "sass": "1.49.11",
+    "svgo": "2.8.0",
+    "svgstore": "3.0.1",
     "vue": "3.2.31",
     "vue-router": "4.0.14"
   },
