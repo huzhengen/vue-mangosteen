@@ -12,7 +12,7 @@ export const StartPage = defineComponent({
             开始记账
           </Button>
         </div>
-        <FloatButton />
+        <FloatButton iconName="add" />
       </div>
     )
   },
