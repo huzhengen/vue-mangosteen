@@ -8,6 +8,7 @@ export type IconName =
   | 'cloud'
   | 'mangosteen'
   | 'pig'
+  | 'menu'
 
 export const Icon = defineComponent({
   props: {
