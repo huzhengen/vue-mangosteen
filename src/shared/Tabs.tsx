@@ -5,9 +5,6 @@ export const Tabs = defineComponent({
     selected: {
       type: String as PropType<string>,
     },
-    onUpdateSelected: {
-      type: Function as PropType<(name: string) => void>,
-    },
   },
   setup: (props, context) => {
     return () => {
@@ -16,9 +13,6 @@ export const Tabs = defineComponent({
       if (tabs.some((tab) => tab.type !== Tab)) {
         throw new Error('<Tabs> only accepts <Tab> as children')
       }
-      console.log(tabs)
-      console.log(props.selected)
-
       // for (let i = 0; i < tabs.length; i++) {
       //   if (tabs[i].type !== Tab) {
       //     throw new Error('<Tabs> only accepts <Tab> as children')
@@ -29,7 +23,9 @@ export const Tabs = defineComponent({
           <ol class={s.tabs_nav}>
             {tabs.map((item) => (
               <li
-                onClick={() => props.onUpdateSelected?.(item.props?.name)}
+                onClick={() =>
+                  context.emit('update:selected', item.props?.name)
+                }
                 class={item.props?.name === props.selected ? s.selected : ''}
               >
                 {item.props?.name}
