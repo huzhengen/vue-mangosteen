@@ -1,6 +1,7 @@
 .wrapper {
 }
 .dateAndAmount {
+  background: var(--overlay-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,7 +18,7 @@
       width: 24px;
       height: 24px;
       margin-right: 8px;
-      fill: var(--amount-text);
+      fill: var(--button-bg);
     }
   }
   > .amount {
@@ -40,7 +41,7 @@
   border-top: 1px solid var(--button-border-color);
   > button {
     border: none;
-    background: var(--button-bg);
+    background: var(--number-button-bg);
     &:nth-child(1) {
       grid-area: n1;
     }
@@ -79,8 +80,8 @@
     }
     &:nth-child(13) {
       grid-area: s;
-      background: var(--button-bg-important);
-      color: var(--button-text-important);
+      background: var(--number-button-bg-important);
+      color: var(--number-button-text-important);
     }
   }
 }
