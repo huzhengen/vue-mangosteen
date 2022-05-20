@@ -8,7 +8,7 @@ export const EmojiSelect = defineComponent({
     },
   },
   setup: (props, context) => {
-    const refSelected = ref(1)
+    const refSelected = ref(0)
     const table: [string, string[]][] = [
       [
         '表情',
@@ -81,18 +81,15 @@ export const EmojiSelect = defineComponent({
       ['运动', ['sport', 'game']],
     ]
     const onClickTab = (index: number) => {
-      console.log(2, index)
       refSelected.value = index
-      console.log(3, refSelected.value)
     }
     const onClickEmoji = (emoji: string) => {
-      console.log(1, emoji)
       context.emit('update:modelValue', emoji)
     }
     const emojis = computed(() => {
       const selectedItem = table[refSelected.value][1]
-      return selectedItem.map((category) =>
-        emojiList
+      return selectedItem.map((category) => {
+        return emojiList
           .find((item) => item[0] === category)?.[1]
           .map((item) => (
             <li
@@ -102,7 +99,7 @@ export const EmojiSelect = defineComponent({
               {item}
             </li>
           ))
-      )
+      })
     })
 
     return () => (

@@ -46,3 +46,5 @@ vite plugin
 ```
 [vite-plugin-svg-icons](https://github.com/vbenjs/vite-plugin-svg-icons)
 ```
+
+> 创建 Tag 页面，切换表情 tab 有 bug，有可能是因为装了 chrome 插件（Chromoji - Emojis for Google Chrome），把这个插件关闭就好了。
