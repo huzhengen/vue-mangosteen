@@ -24,17 +24,21 @@ export const InputPad = defineComponent({
       const nString = n.toString()
       const dotIndex = refAmount.value.indexOf('.')
       if (refAmount.value.length >= 13) {
+        // 超过13位就不再追加
         return
       }
       if (dotIndex >= 0 && refAmount.value.length - dotIndex > 2) {
+        // 已经有小数点了，小数点后最多两位
         return
       }
       if (nString === '.') {
+        // 输入的是小数点
         if (dotIndex >= 0) {
           // 已经有小数点了
           return
         }
       } else if (nString === '0') {
+        // 输入的是0
         if (dotIndex === -1) {
           // 没有小数点
           if (refAmount.value === '0') {
