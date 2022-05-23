@@ -1,14 +1,31 @@
-import { defineComponent, reactive, ref } from 'vue'
-import { MainLayout } from '../layouts/MainLayout'
+import { defineComponent, PropType, reactive, ref } from 'vue'
+import { MainLayout } from './MainLayout'
 import { Form, FormItem } from '../shared/Form'
 import { Tab, Tabs } from '../shared/Tabs'
 import { Time } from '../shared/time'
 import s from './TimeTabsLayout.module.scss'
 import { Overlay } from 'vant'
 import { OverlayIcon } from '../shared/Overlay'
-import { Charts } from '../components/statistics/Charts'
 
+const c = defineComponent({
+  props: {
+    startDate: {
+      type: String as PropType<string>,
+      required: true,
+    },
+    endDate: {
+      type: String as PropType<string>,
+      required: true,
+    },
+  },
+})
 export const TimeTabsLayout = defineComponent({
+  props: {
+    component: {
+      type: Object as PropType<typeof c>,
+      required: true,
+    },
+  },
   setup: (props, context) => {
     const refKind = ref('本月')
     const time = new Time()
@@ -48,30 +65,30 @@ export const TimeTabsLayout = defineComponent({
           default: () => (
             <>
               <Tabs
-                classPrefix={'customTabs'}
+                classPrefix="customTabs"
                 v-model:selected={refKind.value}
                 onUpdate:selected={onSelect}
               >
                 <Tab name="本月">
-                  <Charts
+                  <props.component
                     startDate={timeList[0].start.format()}
                     endDate={timeList[0].end.format()}
                   />
                 </Tab>
-                <Tab name="上个月">
-                  <Charts
+                <Tab name="上月">
+                  <props.component
                     startDate={timeList[1].start.format()}
                     endDate={timeList[1].end.format()}
                   />
                 </Tab>
                 <Tab name="今年">
-                  <Charts
+                  <props.component
                     startDate={timeList[2].start.format()}
                     endDate={timeList[2].end.format()}
                   />
                 </Tab>
                 <Tab name="自定义时间">
-                  <Charts
+                  <props.component
                     startDate={customTime.start}
                     endDate={customTime.end}
                   />
