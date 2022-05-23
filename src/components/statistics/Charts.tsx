@@ -1,6 +1,9 @@
 import { defineComponent, PropType, ref } from 'vue'
 import s from './Charts.module.scss'
 import { FormItem } from '../../shared/Form'
+import { LineChart } from './LineChart'
+import { PieChart } from './PieChart'
+import { Bars } from './Bars'
 
 export const Charts = defineComponent({
   props: {
@@ -26,6 +29,9 @@ export const Charts = defineComponent({
           ]}
           v-model={category.value}
         />
+        <LineChart />
+        <PieChart />
+        <Bars />
       </div>
     )
   },
