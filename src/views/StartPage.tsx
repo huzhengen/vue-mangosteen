@@ -1,25 +1,20 @@
-import { defineComponent, ref } from 'vue'
-import { Button } from '../shared/Button'
-import { FloatButton } from '../shared/FloatButton'
-import s from './StartPage.module.scss'
-import { Center } from '../shared/Center'
-import { Icon } from '../shared/Icon'
-import { Overlay } from '../shared/Overlay'
+import { defineComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import { MainLayout } from '../layouts/MainLayout'
+import { Button } from '../shared/Button'
+import { Center } from '../shared/Center'
+import { FloatButton } from '../shared/FloatButton'
+import { Icon } from '../shared/Icon'
+import { OverlayIcon } from '../shared/Overlay'
+import s from './StartPage.module.scss'
+
 export const StartPage = defineComponent({
   setup: (props, context) => {
-    const refOverlayVisible = ref(false)
-    const onClickMenu = () => {
-      refOverlayVisible.value = !refOverlayVisible.value
-    }
     return () => (
       <MainLayout>
         {{
           title: () => '凤果记账',
-          icon: () => (
-            <Icon name="menu" class={s.navIcon} onClick={onClickMenu} />
-          ),
+          icon: () => <OverlayIcon />,
           default: () => (
             <>
               <Center class={s.pig_wrapper}>
@@ -33,9 +28,6 @@ export const StartPage = defineComponent({
               <RouterLink to="/items/create">
                 <FloatButton iconName="add" />
               </RouterLink>
-              {refOverlayVisible.value && (
-                <Overlay onClose={() => (refOverlayVisible.value = false)} />
-              )}
             </>
           ),
         }}

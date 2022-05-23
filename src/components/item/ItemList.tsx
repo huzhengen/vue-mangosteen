@@ -1,12 +1,12 @@
-import { defineComponent, reactive, ref, watchEffect } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Form, FormItem } from '../../shared/Form'
-import { Icon } from '../../shared/Icon'
 import { Tab, Tabs } from '../../shared/Tabs'
 import { Time } from '../../shared/time'
 import s from './ItemList.module.scss'
 import { ItemSummary } from './ItemSummary'
 import { Overlay } from 'vant'
+import { OverlayIcon } from '../../shared/Overlay'
 
 export const ItemList = defineComponent({
   setup: (props, context) => {
@@ -30,24 +30,28 @@ export const ItemList = defineComponent({
         end: time.lastDayOfYear(),
       },
     ]
-    watchEffect(() => {
-      if (refKind.value === '自定义时间') {
-        refOverlayVisible.value = true
-      }
-    })
     const refOverlayVisible = ref(false)
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
       refOverlayVisible.value = false
     }
+    const onSelect = (value: string) => {
+      if (value === '自定义时间') {
+        refOverlayVisible.value = true
+      }
+    }
     return () => (
       <MainLayout>
         {{
           title: () => '我的记账',
-          icon: () => <Icon name="menu" />,
+          icon: () => <OverlayIcon />,
           default: () => (
             <>
-              <Tabs classPrefix={'customTabs'} v-model:selected={refKind.value}>
+              <Tabs
+                classPrefix={'customTabs'}
+                v-model:selected={refKind.value}
+                onUpdate:selected={onSelect}
+              >
                 <Tab name="本月">
                   <ItemSummary
                     startDate={timeList[0].start.format()}
@@ -90,7 +94,12 @@ export const ItemList = defineComponent({
                       />
                       <FormItem>
                         <div class={s.actions}>
-                          <button type="button">取消</button>
+                          <button
+                            type="button"
+                            onClick={() => (refOverlayVisible.value = false)}
+                          >
+                            取消
+                          </button>
                           <button type="submit">确认</button>
                         </div>
                       </FormItem>
