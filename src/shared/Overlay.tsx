@@ -1,5 +1,5 @@
 import { defineComponent, PropType, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { Icon } from './Icon'
 import s from './Overlay.module.scss'
 export const Overlay = defineComponent({
@@ -9,8 +9,9 @@ export const Overlay = defineComponent({
     },
   },
   setup: (props, context) => {
+    const router = useRouter()
     const { slots } = context
-    const onClickSignIn = () => {}
+    const onClickSignIn = () => router.push(`/sign_in/`)
     return () => (
       <>
         <div class={s.mask} onClick={props.onClose}></div>
@@ -27,7 +28,7 @@ export const Overlay = defineComponent({
                   <span>统计图表</span>
                 </RouterLink>
               </li>
-              <li>
+              {/* <li>
                 <RouterLink to="/export" class={s.action}>
                   <Icon name="export" class={s.icon} />
                   <span>导出数据</span>
@@ -38,7 +39,7 @@ export const Overlay = defineComponent({
                   <Icon name="notify" class={s.icon} />
                   <span>记账提醒</span>
                 </RouterLink>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>

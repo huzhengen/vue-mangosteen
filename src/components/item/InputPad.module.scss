@@ -9,7 +9,7 @@
   font-family: monospace;
   border-top: 1px solid var(--button-border-color);
   > .date {
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -18,12 +18,12 @@
       width: 24px;
       height: 24px;
       margin-right: 8px;
-      fill: var(--amount-text);
+      fill: var(--number-button-bg-important);
     }
   }
   > .amount {
     font-size: 20px;
-    color: var(--amount-text);
+    color: var(--number-button-bg-important);
   }
 }
 .buttons {

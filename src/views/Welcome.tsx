@@ -1,4 +1,11 @@
-import { defineComponent, ref, Transition, VNode, watchEffect } from 'vue'
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  Transition,
+  VNode,
+  watchEffect,
+} from 'vue'
 import {
   RouteLocationNormalizedLoaded,
   RouterView,
@@ -8,6 +15,7 @@ import {
 import { useSwipe } from '../hooks/useSwipe'
 import s from './Welcome.module.scss'
 import { throttle } from '../shared/throttle'
+import { Dialog } from 'vant'
 
 const pushMap: Record<string, string> = {
   Welcome1: '/welcome/2',
@@ -31,6 +39,16 @@ export const Welcome = defineComponent({
     watchEffect(() => {
       if (swiping.value && direction.value === 'left') {
         replace()
+      }
+    })
+
+    onMounted(() => {
+      if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        Dialog.alert({
+          message: '建议使用手机打开该应用。',
+        }).then(() => {
+          // on close
+        })
       }
     })
 

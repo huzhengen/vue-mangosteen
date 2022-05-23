@@ -3,6 +3,7 @@ import { Button } from '../../shared/Button'
 import { Rules, validate } from '../../shared/validate'
 import { Form, FormItem } from '../../shared/Form'
 import s from './Tag.module.scss'
+import { useRouter } from 'vue-router'
 
 export const TagForm = defineComponent({
   props: {
@@ -11,12 +12,14 @@ export const TagForm = defineComponent({
     },
   },
   setup: (props, context) => {
+    const router = useRouter()
     const formData = reactive({
       name: '',
       sign: '',
     })
     const errors = reactive<{ [k in keyof typeof formData]?: string[] }>({})
     const onSubmit = (e: Event) => {
+      e.preventDefault()
       const rules: Rules<typeof formData> = [
         { key: 'name', type: 'required', message: '必填' },
         {
@@ -32,7 +35,10 @@ export const TagForm = defineComponent({
         sign: undefined,
       })
       Object.assign(errors, validate(formData, rules))
-      e.preventDefault()
+
+      if (!errors['name']?.[0] && !errors['sign']?.[0]) {
+        router.push('/items/create')
+      }
     }
     return () => (
       <Form onSubmit={onSubmit}>

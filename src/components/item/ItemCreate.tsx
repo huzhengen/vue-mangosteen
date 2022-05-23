@@ -1,4 +1,5 @@
 import { defineComponent, PropType, ref } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Icon } from '../../shared/Icon'
 import { Tab, Tabs } from '../../shared/Tabs'
@@ -12,6 +13,7 @@ export const ItemCreate = defineComponent({
     },
   },
   setup: (props, context) => {
+    const router = useRouter()
     const refKind = ref('支出')
     const refExpensesTags = ref([
       { id: 1, name: '餐费', sign: '￥', category: 'expenses' },
@@ -63,18 +65,22 @@ export const ItemCreate = defineComponent({
       <MainLayout class={s.layout}>
         {{
           title: () => '记一笔账',
-          icon: () => <Icon name="left" class={s.navIcon} />,
+          icon: () => (
+            <Icon name="left" class={s.navIcon} onClick={() => router.go(-1)} />
+          ),
           default: () => (
             <>
               <div class={s.wrapper}>
                 <Tabs v-model:selected={refKind.value} class={s.tabs}>
                   <Tab name="支出" class={s.tags_wrapper}>
-                    <div class={s.tag}>
-                      <div class={s.sign}>
-                        <Icon name="add" class={s.createTag} />
+                    <RouterLink to={'/tags/create'}>
+                      <div class={s.tag}>
+                        <div class={s.sign}>
+                          <Icon name="add" class={s.createTag} />
+                        </div>
+                        <div class={s.name}>新增</div>
                       </div>
-                      <div class={s.name}>新增</div>
-                    </div>
+                    </RouterLink>
                     {refExpensesTags.value.map((tag) => (
                       <div class={[s.tag, s.selected]}>
                         <div class={s.sign}>{tag.sign}</div>
@@ -83,12 +89,14 @@ export const ItemCreate = defineComponent({
                     ))}
                   </Tab>
                   <Tab name="收入" class={s.tags_wrapper}>
-                    <div class={s.tag}>
-                      <div class={s.sign}>
-                        <Icon name="add" class={s.createTag} />
+                    <RouterLink to={'/tags/create'}>
+                      <div class={s.tag}>
+                        <div class={s.sign}>
+                          <Icon name="add" class={s.createTag} />
+                        </div>
+                        <div class={s.name}>新增</div>
                       </div>
-                      <div class={s.name}>新增</div>
-                    </div>
+                    </RouterLink>
                     {refIncomeTags.value.map((tag) => (
                       <div class={[s.tag, s.selected]}>
                         <div class={s.sign}>{tag.sign}</div>

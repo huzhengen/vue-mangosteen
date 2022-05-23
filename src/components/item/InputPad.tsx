@@ -1,5 +1,6 @@
 import { DatetimePicker, Popup } from 'vant'
 import { defineComponent, PropType, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '../../shared/Icon'
 import { Time } from '../../shared/time'
 import s from './InputPad.module.scss'
@@ -10,6 +11,7 @@ export const InputPad = defineComponent({
     },
   },
   setup: (props, context) => {
+    const router = useRouter()
     const now = new Date()
     const refDate = ref(now)
     const refDatePickerVisible = ref(false)
@@ -126,7 +128,12 @@ export const InputPad = defineComponent({
           refAmount.value = '0'
         },
       },
-      { text: '提交', onClick: () => {} },
+      {
+        text: '提交',
+        onClick: () => {
+          router.push(`/items/`)
+        },
+      },
     ]
     return () => (
       <>

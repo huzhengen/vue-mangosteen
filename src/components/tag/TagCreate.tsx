@@ -1,13 +1,12 @@
-import { defineComponent, PropType, reactive } from 'vue'
+import { defineComponent, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
-import { Button } from '../../shared/Button'
-import { EmojiSelect } from '../../shared/EmojiSelect'
 import { Icon } from '../../shared/Icon'
 import { Rules, validate } from '../../shared/validate'
-import s from './Tag.module.scss'
 import { TagForm } from './TagForm'
 export const TagCreate = defineComponent({
   setup: (props, context) => {
+    const router = useRouter()
     const formData = reactive({
       name: '',
       sign: '',
@@ -35,7 +34,7 @@ export const TagCreate = defineComponent({
       <MainLayout>
         {{
           title: () => '新建标签',
-          icon: () => <Icon name="left" onClick={() => {}} />,
+          icon: () => <Icon name="left" onClick={() => router.go(-1)} />,
           default: () => (
             <>
               <TagForm />

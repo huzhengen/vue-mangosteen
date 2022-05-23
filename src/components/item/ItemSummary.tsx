@@ -1,4 +1,5 @@
 import { defineComponent, PropType } from 'vue'
+import { RouterLink } from 'vue-router'
 import { FloatButton } from '../../shared/FloatButton'
 import s from './ItemSummary.module.scss'
 export const ItemSummary = defineComponent({
@@ -103,8 +104,10 @@ export const ItemSummary = defineComponent({
             </div>
           </li>
         </ol>
-        <div class={s.more}>向下滑动加载更多</div>
-        <FloatButton iconName="add" />
+        {/* <div class={s.more}>向下滑动加载更多</div> */}
+        <RouterLink to="/items/create">
+          <FloatButton iconName="add" />
+        </RouterLink>
       </div>
     )
   },
