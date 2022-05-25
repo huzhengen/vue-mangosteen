@@ -3,8 +3,15 @@ import { RouterLink, useRouter } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Icon } from '../../shared/Icon'
 import { Tab, Tabs } from '../../shared/Tabs'
+import { Time } from '../../shared/time'
 import { InputPad } from './InputPad'
 import s from './ItemCreate.module.scss'
+
+interface Tag {
+  sign: string
+  name: string
+  category: string
+}
 
 export const ItemCreate = defineComponent({
   props: {
@@ -26,7 +33,15 @@ export const ItemCreate = defineComponent({
       name: '',
       category: '',
       amount: '',
+      time: '',
     })
+
+    const changeFormData = (tag: Tag) => {
+      Object.assign(
+        formData,
+        Object.assign(tag, { time: new Time().format('YYYY-MM-DD HH:mm') })
+      )
+    }
     const onSubmit = () => {
       console.log(formData)
       const itemsArray = JSON.parse(localStorage.getItem('items') || '[]')
@@ -54,28 +69,18 @@ export const ItemCreate = defineComponent({
                         <div class={s.name}>新增</div>
                       </div>
                     </RouterLink>
-                    {refExpensesTags.value.map(
-                      (tag: {
-                        sign: string
-                        name: string
-                        category: string
-                      }) => (
-                        <div
-                          class={[
-                            s.tag,
-                            formData.name === tag.name ? s.selected : '',
-                          ]}
-                          onClick={() => {
-                            formData.name = tag.name
-                            formData.sign = tag.sign
-                            formData.category = tag.category
-                          }}
-                        >
-                          <div class={s.sign}>{tag.sign}</div>
-                          <div class={s.name}>{tag.name}</div>
-                        </div>
-                      )
-                    )}
+                    {refExpensesTags.value.map((tag: Tag) => (
+                      <div
+                        class={[
+                          s.tag,
+                          formData.name === tag.name ? s.selected : '',
+                        ]}
+                        onClick={() => changeFormData(tag)}
+                      >
+                        <div class={s.sign}>{tag.sign}</div>
+                        <div class={s.name}>{tag.name}</div>
+                      </div>
+                    ))}
                   </Tab>
                   <Tab name="收入" class={s.tags_wrapper}>
                     <RouterLink to={'/tags/create'}>
@@ -86,28 +91,18 @@ export const ItemCreate = defineComponent({
                         <div class={s.name}>新增</div>
                       </div>
                     </RouterLink>
-                    {refIncomeTags.value.map(
-                      (tag: {
-                        sign: string
-                        name: string
-                        category: string
-                      }) => (
-                        <div
-                          class={[
-                            s.tag,
-                            formData.name === tag.name ? s.selected : '',
-                          ]}
-                          onClick={() => {
-                            formData.name = tag.name
-                            formData.sign = tag.sign
-                            formData.category = tag.category
-                          }}
-                        >
-                          <div class={s.sign}>{tag.sign}</div>
-                          <div class={s.name}>{tag.name}</div>
-                        </div>
-                      )
-                    )}
+                    {refIncomeTags.value.map((tag: Tag) => (
+                      <div
+                        class={[
+                          s.tag,
+                          formData.name === tag.name ? s.selected : '',
+                        ]}
+                        onClick={() => changeFormData(tag)}
+                      >
+                        <div class={s.sign}>{tag.sign}</div>
+                        <div class={s.name}>{tag.name}</div>
+                      </div>
+                    ))}
                   </Tab>
                 </Tabs>
                 <div class={s.inputPad_wrapper}>
