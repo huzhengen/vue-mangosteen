@@ -4,12 +4,17 @@ import { useRouter } from 'vue-router'
 import { Icon } from '../../shared/Icon'
 import { Time } from '../../shared/time'
 import s from './InputPad.module.scss'
+
 export const InputPad = defineComponent({
   props: {
-    name: {
+    modelValue: {
       type: String as PropType<string>,
     },
+    onSubmit: {
+      type: Function as PropType<() => void>,
+    },
   },
+  emits: ['update:modelValue'],
   setup: (props, context) => {
     const router = useRouter()
     const now = new Date()
@@ -131,12 +136,13 @@ export const InputPad = defineComponent({
       {
         text: '提交',
         onClick: () => {
-          router.push(`/items/`)
+          context.emit('update:modelValue', refAmount.value)
+          props?.onSubmit?.()
         },
       },
     ]
     return () => (
-      <>
+      <div>
         <div class={s.dateAndAmount}>
           <span class={s.date}>
             <Icon name="date" class={s.icon} />
@@ -165,7 +171,7 @@ export const InputPad = defineComponent({
             <button onClick={button.onClick}>{button.text}</button>
           ))}
         </div>
-      </>
+      </div>
     )
   },
 })

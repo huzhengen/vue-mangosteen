@@ -1,4 +1,4 @@
-import { defineComponent, PropType, ref } from 'vue'
+import { defineComponent, PropType, reactive, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Icon } from '../../shared/Icon'
@@ -21,6 +21,19 @@ export const ItemCreate = defineComponent({
     const refIncomeTags = ref(
       JSON.parse(localStorage.getItem('incomeTags') || '{}')
     )
+    const formData = reactive({
+      sign: '',
+      name: '',
+      category: '',
+      amount: '',
+    })
+    const onSubmit = () => {
+      console.log(formData)
+      const itemsArray = JSON.parse(localStorage.getItem('items') || '[]')
+      itemsArray.push(formData)
+      localStorage.setItem('items', JSON.stringify(itemsArray))
+      router.push(`/items/`)
+    }
     return () => (
       <MainLayout class={s.layout}>
         {{
@@ -42,8 +55,22 @@ export const ItemCreate = defineComponent({
                       </div>
                     </RouterLink>
                     {refExpensesTags.value.map(
-                      (tag: { sign: string; name: string; type: string }) => (
-                        <div class={[s.tag, s.selected]}>
+                      (tag: {
+                        sign: string
+                        name: string
+                        category: string
+                      }) => (
+                        <div
+                          class={[
+                            s.tag,
+                            formData.name === tag.name ? s.selected : '',
+                          ]}
+                          onClick={() => {
+                            formData.name = tag.name
+                            formData.sign = tag.sign
+                            formData.category = tag.category
+                          }}
+                        >
                           <div class={s.sign}>{tag.sign}</div>
                           <div class={s.name}>{tag.name}</div>
                         </div>
@@ -60,8 +87,22 @@ export const ItemCreate = defineComponent({
                       </div>
                     </RouterLink>
                     {refIncomeTags.value.map(
-                      (tag: { sign: string; name: string; type: string }) => (
-                        <div class={[s.tag, s.selected]}>
+                      (tag: {
+                        sign: string
+                        name: string
+                        category: string
+                      }) => (
+                        <div
+                          class={[
+                            s.tag,
+                            formData.name === tag.name ? s.selected : '',
+                          ]}
+                          onClick={() => {
+                            formData.name = tag.name
+                            formData.sign = tag.sign
+                            formData.category = tag.category
+                          }}
+                        >
                           <div class={s.sign}>{tag.sign}</div>
                           <div class={s.name}>{tag.name}</div>
                         </div>
@@ -70,7 +111,7 @@ export const ItemCreate = defineComponent({
                   </Tab>
                 </Tabs>
                 <div class={s.inputPad_wrapper}>
-                  <InputPad />
+                  <InputPad v-model={formData.amount} onSubmit={onSubmit} />
                 </div>
               </div>
             </>

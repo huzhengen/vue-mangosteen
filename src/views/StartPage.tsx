@@ -20,6 +20,9 @@ export const StartPage = defineComponent({
       if (!localStorage.getItem('incomeTags')) {
         localStorage.setItem('incomeTags', JSON.stringify([]))
       }
+      if (!localStorage.getItem('items')) {
+        localStorage.setItem('items', JSON.stringify([]))
+      }
     })
     return () => (
       <MainLayout>
