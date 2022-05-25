@@ -40,6 +40,7 @@ export const SignInPage = defineComponent({
       )
 
       if (!errors.email?.[0] && !errors.code?.[0]) {
+        localStorage.setItem('username', formData.email)
         router.go(-1)
       }
     }

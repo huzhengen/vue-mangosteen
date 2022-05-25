@@ -12,16 +12,23 @@ export const Overlay = defineComponent({
     const router = useRouter()
     const { slots } = context
     const onClickSignIn = () => router.push(`/sign_in/`)
+    const username = ref(localStorage.getItem('username'))
     return () => (
       <>
         <div class={s.mask} onClick={props.onClose}></div>
         <div class={s.overlay}>
           <section class={s.currentUser} onClick={onClickSignIn}>
-            <h2>未登录用户</h2>
-            <p>点击这里登录</p>
+            <h2>{username.value}</h2>
+            {username.value !== '未登录用户' ? '' : <p>点击这里登录</p>}
           </section>
           <nav>
             <ul class={s.action_list}>
+            <li>
+                <RouterLink to="/start" class={s.action}>
+                  <Icon name="mangosteen" class={s.icon} />
+                  <span>首页</span>
+                </RouterLink>
+              </li>
               <li>
                 <RouterLink to="/statistics" class={s.action}>
                   <Icon name="charts" class={s.icon} />

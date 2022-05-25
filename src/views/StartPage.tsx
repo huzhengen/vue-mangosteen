@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { MainLayout } from '../layouts/MainLayout'
 import { Button } from '../shared/Button'
@@ -10,6 +10,11 @@ import s from './StartPage.module.scss'
 
 export const StartPage = defineComponent({
   setup: (props, context) => {
+    onMounted(() => {
+      if (!localStorage.getItem('username')) {
+        localStorage.setItem('username', '未登录用户')
+      }
+    })
     return () => (
       <MainLayout>
         {{
