@@ -1,9 +1,10 @@
-import { defineComponent, PropType, reactive } from 'vue'
+import { defineComponent, PropType, reactive, ref } from 'vue'
 import { Button } from '../../shared/Button'
 import { Rules, validate } from '../../shared/validate'
 import { Form, FormItem } from '../../shared/Form'
 import s from './Tag.module.scss'
 import { useRouter } from 'vue-router'
+import { addUnit } from 'vant/lib/utils'
 
 export const TagForm = defineComponent({
   props: {
@@ -16,6 +17,7 @@ export const TagForm = defineComponent({
     const formData = reactive({
       name: '',
       sign: '',
+      category: 'expenses',
     })
     const errors = reactive<{ [k in keyof typeof formData]?: string[] }>({})
     const onSubmit = (e: Event) => {
@@ -37,6 +39,21 @@ export const TagForm = defineComponent({
       Object.assign(errors, validate(formData, rules))
 
       if (!errors['name']?.[0] && !errors['sign']?.[0]) {
+        if (formData.category === 'expenses') {
+          const expensesTagsString =
+            localStorage.getItem('expensesTags') || '[]'
+          let expensesTagsArray = JSON.parse(expensesTagsString)
+          expensesTagsArray.push(formData)
+          localStorage.setItem(
+            'expensesTags',
+            JSON.stringify(expensesTagsArray)
+          )
+        } else if (formData.category === 'income') {
+          const incomeTagsString = localStorage.getItem('incomeTags') || '[]'
+          let incomeTagsArray = JSON.parse(incomeTagsString)
+          incomeTagsArray.push(formData)
+          localStorage.setItem('incomeTags', JSON.stringify(incomeTagsArray))
+        }
         router.push('/items/create')
       }
     }
@@ -47,6 +64,15 @@ export const TagForm = defineComponent({
           type="text"
           v-model={formData.name}
           error={errors['name']?.[0]}
+        />
+        <FormItem
+          label="类型"
+          type="select"
+          options={[
+            { value: 'expenses', text: '支出' },
+            { value: 'income', text: '收入' },
+          ]}
+          v-model={formData.category}
         />
         <FormItem
           label={'符号 ' + formData.sign}

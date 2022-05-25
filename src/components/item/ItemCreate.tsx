@@ -15,52 +15,12 @@ export const ItemCreate = defineComponent({
   setup: (props, context) => {
     const router = useRouter()
     const refKind = ref('支出')
-    const refExpensesTags = ref([
-      { id: 1, name: '餐费', sign: '￥', category: 'expenses' },
-      { id: 2, name: '打车', sign: '￥', category: 'expenses' },
-      { id: 3, name: '旅游', sign: '￥', category: 'expenses' },
-      { id: 4, name: '运动', sign: '￥', category: 'expenses' },
-      { id: 5, name: '买衣服', sign: '￥', category: 'expenses' },
-      { id: 6, name: '购物', sign: '￥', category: 'expenses' },
-      { id: 7, name: '话费', sign: '￥', category: 'expenses' },
-    ])
-    const refIncomeTags = ref([
-      { id: 4, name: '工资', sign: '￥', category: 'income' },
-      { id: 5, name: '彩票', sign: '￥', category: 'income' },
-      { id: 6, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 11, name: '彩票', sign: '￥', category: 'income' },
-      { id: 18, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 17, name: '彩票', sign: '￥', category: 'income' },
-      { id: 19, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 4, name: '工资', sign: '￥', category: 'income' },
-      { id: 5, name: '彩票', sign: '￥', category: 'income' },
-      { id: 6, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 11, name: '彩票', sign: '￥', category: 'income' },
-      { id: 18, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 17, name: '彩票', sign: '￥', category: 'income' },
-      { id: 19, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 4, name: '工资', sign: '￥', category: 'income' },
-      { id: 5, name: '彩票', sign: '￥', category: 'income' },
-      { id: 6, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 11, name: '彩票', sign: '￥', category: 'income' },
-      { id: 18, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 17, name: '彩票', sign: '￥', category: 'income' },
-      { id: 19, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 4, name: '工资', sign: '￥', category: 'income' },
-      { id: 5, name: '彩票', sign: '￥', category: 'income' },
-      { id: 6, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 11, name: '彩票', sign: '￥', category: 'income' },
-      { id: 18, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 17, name: '彩票', sign: '￥', category: 'income' },
-      { id: 19, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 4, name: '工资', sign: '￥', category: 'income' },
-      { id: 5, name: '彩票', sign: '￥', category: 'income' },
-      { id: 6, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 11, name: '彩票', sign: '￥', category: 'income' },
-      { id: 18, name: '滴滴', sign: '￥', category: 'income' },
-      { id: 17, name: '彩票', sign: '￥', category: 'income' },
-      { id: 19, name: '滴滴', sign: '￥', category: 'income' },
-    ])
+    const refExpensesTags = ref(
+      JSON.parse(localStorage.getItem('expensesTags') || '{}')
+    )
+    const refIncomeTags = ref(
+      JSON.parse(localStorage.getItem('incomeTags') || '{}')
+    )
     return () => (
       <MainLayout class={s.layout}>
         {{
@@ -81,12 +41,14 @@ export const ItemCreate = defineComponent({
                         <div class={s.name}>新增</div>
                       </div>
                     </RouterLink>
-                    {refExpensesTags.value.map((tag) => (
-                      <div class={[s.tag, s.selected]}>
-                        <div class={s.sign}>{tag.sign}</div>
-                        <div class={s.name}>{tag.name}</div>
-                      </div>
-                    ))}
+                    {refExpensesTags.value.map(
+                      (tag: { sign: string; name: string; type: string }) => (
+                        <div class={[s.tag, s.selected]}>
+                          <div class={s.sign}>{tag.sign}</div>
+                          <div class={s.name}>{tag.name}</div>
+                        </div>
+                      )
+                    )}
                   </Tab>
                   <Tab name="收入" class={s.tags_wrapper}>
                     <RouterLink to={'/tags/create'}>
@@ -97,12 +59,14 @@ export const ItemCreate = defineComponent({
                         <div class={s.name}>新增</div>
                       </div>
                     </RouterLink>
-                    {refIncomeTags.value.map((tag) => (
-                      <div class={[s.tag, s.selected]}>
-                        <div class={s.sign}>{tag.sign}</div>
-                        <div class={s.name}>{tag.name}</div>
-                      </div>
-                    ))}
+                    {refIncomeTags.value.map(
+                      (tag: { sign: string; name: string; type: string }) => (
+                        <div class={[s.tag, s.selected]}>
+                          <div class={s.sign}>{tag.sign}</div>
+                          <div class={s.name}>{tag.name}</div>
+                        </div>
+                      )
+                    )}
                   </Tab>
                 </Tabs>
                 <div class={s.inputPad_wrapper}>

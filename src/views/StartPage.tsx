@@ -14,6 +14,12 @@ export const StartPage = defineComponent({
       if (!localStorage.getItem('username')) {
         localStorage.setItem('username', '未登录用户')
       }
+      if (!localStorage.getItem('expensesTags')) {
+        localStorage.setItem('expensesTags', JSON.stringify([]))
+      }
+      if (!localStorage.getItem('incomeTags')) {
+        localStorage.setItem('incomeTags', JSON.stringify([]))
+      }
     })
     return () => (
       <MainLayout>
