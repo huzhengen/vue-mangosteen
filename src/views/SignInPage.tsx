@@ -69,6 +69,10 @@ export const SignInPage = defineComponent({
                   placeholder="请输入六位数字"
                   v-model={formData.code}
                   error={errors.code?.[0]}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    formData.code = '000000'
+                  }}
                 />
                 <FormItem style={{ paddingTop: '96px' }}>
                   <Button>登录</Button>

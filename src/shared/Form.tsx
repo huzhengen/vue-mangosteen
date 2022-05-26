@@ -35,6 +35,9 @@ export const FormItem = defineComponent({
     error: {
       type: String,
     },
+    onClick: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+    },
     placeholder: String,
     options: Array as PropType<Array<{ value: string; text: string }>>,
   },
@@ -75,7 +78,10 @@ export const FormItem = defineComponent({
                 }
                 class={[s.formItem, s.input, s.validationCodeInput]}
               />
-              <Button class={[s.formItem, s.button, s.validationCodeButton]}>
+              <Button
+                class={[s.formItem, s.button, s.validationCodeButton]}
+                onClick={props.onClick}
+              >
                 发送验证码
               </Button>
             </>
