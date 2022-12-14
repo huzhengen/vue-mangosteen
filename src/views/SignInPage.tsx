@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { MainLayout } from '../layouts/MainLayout'
@@ -21,28 +22,20 @@ export const SignInPage = defineComponent({
       e.preventDefault()
 
       Object.assign(errors, {
-        email: [],
-        code: [],
+        email: [], code: []
       })
+      Object.assign(errors, validate(formData, [
+        { key: 'email', type: 'required', message: '必填' },
+        { key: 'email', type: 'pattern', regex: /.+@.+/, message: '必须是邮箱地址' },
+        { key: 'code', type: 'required', message: '必填' },
+      ]))
+    }
+    const onClickSendValidationCode = async () => {
+      const response = await axios.post('/api/v1/validation_codes', { email: formData.email })
+   
 
-      Object.assign(
-        errors,
-        validate(formData, [
-          { key: 'email', type: 'required', message: '必填' },
-          {
-            key: 'email',
-            type: 'pattern',
-            regex: /.+@.+/,
-            message: '必须是邮箱地址',
-          },
-          { key: 'code', type: 'required', message: '必填' },
-        ])
-      )
+      console.log(response);
 
-      if (!errors.email?.[0] && !errors.code?.[0]) {
-        localStorage.setItem('username', formData.email)
-        router.go(-1)
-      }
     }
     return () => (
       <MainLayout>
@@ -56,26 +49,15 @@ export const SignInPage = defineComponent({
                 <h1 class={s.appName}>凤果记账</h1>
               </div>
               <Form onSubmit={onSubmit}>
-                <FormItem
-                  label="邮箱地址"
-                  type="text"
-                  placeholder="请输入邮箱，然后点击发送验证码"
-                  v-model={formData.email}
-                  error={errors.email?.[0]}
-                />
-                <FormItem
-                  label="验证码"
-                  type="validationCode"
-                  placeholder="请输入六位数字"
-                  v-model={formData.code}
-                  error={errors.code?.[0]}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    formData.code = '000000'
-                  }}
-                />
+                <FormItem label="邮箱地址" type="text"
+                  placeholder='请输入邮箱，然后点击发送验证码'
+                  v-model={formData.email} error={errors.email?.[0]} />
+                <FormItem label="验证码" type="validationCode"
+                  placeholder='请输入六位数字'
+                  onClick={onClickSendValidationCode}
+                  v-model={formData.code} error={errors.code?.[0]} />
                 <FormItem style={{ paddingTop: '96px' }}>
-                  <Button>登录</Button>
+                  <Button>Sign In</Button>
                 </FormItem>
               </Form>
             </div>
