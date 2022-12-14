@@ -4,7 +4,7 @@ import s from './Button.module.scss'
 export const Button = defineComponent({
   props: {
     onClick: {
-      type: Function as PropType<(e: MouseEvent) => void>,
+      type: Function as PropType<() => void>,
     },
     level: {
       type: String as PropType<'important' | 'normal' | 'danger'>,
@@ -13,11 +13,15 @@ export const Button = defineComponent({
     type: {
       type: String as PropType<'submit' | 'button'>,
       default: 'button'
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     }
   },
   setup: (props, context) => {
     return () => (
-      <button type={props.type} class={[s.button, s[props.level]]} onClick={props.onClick}>
+      <button disabled={props.disabled} type={props.type} class={[s.button, s[props.level]]} onClick={props.onClick}>
         {context.slots.default?.()}
       </button>
     )

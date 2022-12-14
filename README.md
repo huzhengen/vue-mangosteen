@@ -48,3 +48,9 @@ vite plugin
 ```
 
 > 创建 Tag 页面，切换表情 tab 有 bug，有可能是因为装了 chrome 插件（Chromoji - Emojis for Google Chrome），把这个插件关闭就好了。
+
+curl
+```
+curl  -v  -XPOST -H "Content-Type:application/json"  http://123.45.67.89:3000/api/v1/validation_codes  -d  ' {"email" : "xxx@xxx.com"} '
+
+```

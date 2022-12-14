@@ -6,10 +6,16 @@
   font-size: var(--button-font-size);
   border-radius: var(--button-radius);
   height: var(--button-height);
-  &.normal {
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
-  &.important {
-  }
+
+  &.normal {}
+
+  &.important {}
+
   &.danger {
     background: var(--button-bg-danger);
     border-color: var(--button-bg-danger);
