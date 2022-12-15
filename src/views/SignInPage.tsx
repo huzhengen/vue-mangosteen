@@ -1,10 +1,9 @@
 import { defineComponent, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useBool } from '../hooks/useBool'
 import { MainLayout } from '../layouts/MainLayout'
 import { Button } from '../shared/Button'
 import { Form, FormItem } from '../shared/Form'
-import { history } from '../shared/history'
 import { http } from '../shared/Http'
 import { Icon } from '../shared/Icon'
 import { hasError, validate } from '../shared/validate'
@@ -12,6 +11,7 @@ import s from './SignInPage.module.scss'
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const router = useRouter()
+    const route = useRoute()
     const formData = reactive({
       email: '',
       code: '',
@@ -37,7 +37,7 @@ export const SignInPage = defineComponent({
         const response = await http.post<{ jwt: string }>('/session', formData)
           .catch(onError)
         localStorage.setItem('jwt', response.data.jwt)
-        history.push('/')
+        router.push(route.query.return_to?.toString() || '/')
       }
     }
     const onError = (error: any) => {
