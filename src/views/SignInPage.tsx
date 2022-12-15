@@ -31,8 +31,15 @@ export const SignInPage = defineComponent({
         { key: 'code', type: 'required', message: '必填' },
       ]))
     }
+    const onError = (error: any) => {
+      if ([422, 400].includes(error.response.status)) {
+        Object.assign(errors, error.response.data.errors)
+      }
+      throw error
+    }
     const onClickSendValidationCode = async () => {
-      // const response = await axios.post('/api/v1/validation_codes', { email: formData.email }).catch(() => { })
+      const response = await axios.post('/api/v1/validation_codes', { email: formData.email })
+        .catch(onError)
       refValidationCode.value.startCount()
     }
     return () => (
