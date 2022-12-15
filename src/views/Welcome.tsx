@@ -1,17 +1,5 @@
-import {
-  defineComponent,
-  onMounted,
-  ref,
-  Transition,
-  VNode,
-  watchEffect,
-} from 'vue'
-import {
-  RouteLocationNormalizedLoaded,
-  RouterView,
-  useRouter,
-  useRoute,
-} from 'vue-router'
+import { defineComponent, onMounted, ref, Transition, VNode, watchEffect, } from 'vue'
+import { RouteLocationNormalizedLoaded, RouterView, useRouter, useRoute, } from 'vue-router'
 import { useSwipe } from '../hooks/useSwipe'
 import s from './Welcome.module.scss'
 import { throttle } from '../shared/throttle'
@@ -43,13 +31,13 @@ export const Welcome = defineComponent({
     })
 
     onMounted(() => {
-      if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-        Dialog.alert({
-          message: '建议使用手机打开该应用。',
-        }).then(() => {
-          // on close
-        })
-      }
+      // if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      //   Dialog.alert({
+      //     message: '建议使用手机打开该应用。',
+      //   }).then(() => {
+      //     // on close
+      //   })
+      // }
     })
 
     return () => (
