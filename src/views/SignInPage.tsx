@@ -35,6 +35,7 @@ export const SignInPage = defineComponent({
       ]))
       if (!hasError(errors)) {
         const response = await http.post<{ jwt: string }>('/session', formData)
+          .catch(onError)
         localStorage.setItem('jwt', response.data.jwt)
         history.push('/')
       }
