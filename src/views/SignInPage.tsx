@@ -6,6 +6,7 @@ import { Button } from '../shared/Button'
 import { Form, FormItem } from '../shared/Form'
 import { http } from '../shared/Http'
 import { Icon } from '../shared/Icon'
+import { refreshMe } from '../shared/me'
 import { hasError, validate } from '../shared/validate'
 import s from './SignInPage.module.scss'
 export const SignInPage = defineComponent({
@@ -37,6 +38,7 @@ export const SignInPage = defineComponent({
         const response = await http.post<{ jwt: string }>('/session', formData)
           .catch(onError)
         localStorage.setItem('jwt', response.data.jwt)
+        refreshMe()
         router.push(route.query.return_to?.toString() || '/')
       }
     }
