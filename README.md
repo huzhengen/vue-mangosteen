@@ -12,6 +12,7 @@ pnpm create vite@2.9.0 vue-mangosteen -- --tmplate vue-ts
 ```
 pnpm i
 pnpm run dev
+pnpm run dev --host=3001
 pnpm run build
 pnpm run preview
 ```
