@@ -1,6 +1,7 @@
 初始化项目，使用 Vue3 和 TSX
 
 ```
+pnpm config set save-prefix=''
 pnpm i -g create-vite
 pnpm create vite@2.9.0 vue-mangosteen -- --tmplate vue-ts
 ```
