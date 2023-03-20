@@ -16,23 +16,36 @@ export const ItemCreate = defineComponent({
     const refKind = ref('支出')
     const refPage = ref(0)
     const refHasMore = ref(false)
+    const onLoadMore = async () => {
+      const response = await http.get<Resources<Tag>>('/tags',
+        { kind: 'expenses', page: refPage.value + 1, _mock: 'tagIndex' }
+      )
+      const { resources, pager } = response.data
+      refExpensesTags.value.push(...resources)
+      refHasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
+      refPage.value += 1
+    }
+
     // expenses
     onMounted(async () => {
-      const response = await http.get<Resources<Tag>>('/tags', { kind: 'expenses', _mock: 'tagsIndex' })
+      const response = await http.get<Resources<Tag>>('/tags',
+        { kind: 'expenses', _mock: 'tagIndex' }
+      )
       const { resources, pager } = response.data
       refExpensesTags.value = resources
-      refPage.value = pager.page
       refHasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
+      refPage.value = 1
     })
 
     // income
     onMounted(async () => {
-      const response = await http.get<{ resources: Tag[] }>('/tags', { kind: 'income', _mock: 'tagsIndex' })
+      const response = await http.get<{ resources: Tag[] }>('/tags',
+        { kind: 'income', _mock: 'tagIndex' }
+      )
       refIncomeTags.value = response.data.resources
     })
     const refExpensesTags = ref<Tag[]>([])
     const refIncomeTags = ref<Tag[]>([])
-
 
     return () => (
       <MainLayout class={s.layout}>{{
@@ -63,8 +76,8 @@ export const ItemCreate = defineComponent({
                   )}
                 </div>
                 <div class={s.more}>
-                  {refHasMore
-                    ? <Button>加载更多标签</Button>
+                  {refHasMore.value
+                    ? <Button onClick={onLoadMore}>加载更多标签</Button>
                     : <span>没有更多标签了</span>}
                 </div>
               </Tab>
