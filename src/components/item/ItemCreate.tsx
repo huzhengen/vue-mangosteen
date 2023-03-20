@@ -13,10 +13,13 @@ export const ItemCreate = defineComponent({
     }
   },
   setup: (props, context) => {
+    const refExpensesTags = ref<Tag[]>([])
+    const refIncomeTags = ref<Tag[]>([])
     const refKind = ref('支出')
     const refPage = ref(0)
     const refHasMore = ref(false)
-    const onLoadMore = async () => {
+
+    const fetchTags = async () => {
       const response = await http.get<Resources<Tag>>('/tags',
         { kind: 'expenses', page: refPage.value + 1, _mock: 'tagIndex' }
       )
@@ -24,18 +27,12 @@ export const ItemCreate = defineComponent({
       refExpensesTags.value.push(...resources)
       refHasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
       refPage.value += 1
+
     }
+    const onLoadMore = () => fetchTags()
 
     // expenses
-    onMounted(async () => {
-      const response = await http.get<Resources<Tag>>('/tags',
-        { kind: 'expenses', _mock: 'tagIndex' }
-      )
-      const { resources, pager } = response.data
-      refExpensesTags.value = resources
-      refHasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
-      refPage.value = 1
-    })
+    onMounted(() => fetchTags())
 
     // income
     onMounted(async () => {
@@ -44,8 +41,6 @@ export const ItemCreate = defineComponent({
       )
       refIncomeTags.value = response.data.resources
     })
-    const refExpensesTags = ref<Tag[]>([])
-    const refIncomeTags = ref<Tag[]>([])
 
     return () => (
       <MainLayout class={s.layout}>{{
