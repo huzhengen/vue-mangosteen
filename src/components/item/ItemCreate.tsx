@@ -1,10 +1,7 @@
-import { defineComponent, onMounted, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { MainLayout } from '../../layouts/MainLayout';
-import { Button } from '../../shared/Button';
-import { http } from '../../shared/Http';
 import { Icon } from '../../shared/Icon';
 import { Tabs, Tab } from '../../shared/Tabs';
-import { useTags } from '../../shared/useTags';
 import { InputPad } from './InputPad';
 import s from './ItemCreate.module.scss';
 import { Tags } from './Tags';
@@ -16,7 +13,7 @@ export const ItemCreate = defineComponent({
   },
   setup: (props, context) => {
     const refKind = ref('支出')
-    
+
     return () => (
       <MainLayout class={s.layout}>{{
         title: () => '记一笔',
@@ -25,10 +22,10 @@ export const ItemCreate = defineComponent({
           <div class={s.wrapper}>
             <Tabs v-model:selected={refKind.value} class={s.tabs}>
               <Tab name="支出">
-                <Tags kind='expenses' />
+                <Tags kind='expenses' key='expenses' />
               </Tab>
               <Tab name="收入">
-                <Tags kind='income' />
+                <Tags kind='income' key='income' />
               </Tab>
             </Tabs>
             <div class={s.inputPad_wrapper}>
