@@ -1,6 +1,7 @@
 import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
+import { BackIcon } from '../../shared/BackIcon'
 import { Icon } from '../../shared/Icon'
 import { Rules, validate } from '../../shared/validate'
 import { TagForm } from './TagForm'
@@ -34,7 +35,7 @@ export const TagCreate = defineComponent({
       <MainLayout>
         {{
           title: () => '新建标签',
-          icon: () => <Icon name="left" onClick={() => router.go(-1)} />,
+          icon: () => <BackIcon />,
           default: () => (
             <>
               <TagForm />
