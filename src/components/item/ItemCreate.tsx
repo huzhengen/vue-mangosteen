@@ -15,7 +15,7 @@ export const ItemCreate = defineComponent({
     const refKind = ref('支出')
     const refTagId = ref<number>()
     const refHappenAt = ref<string>(new Date().toISOString())
-    const refAmount = ref<string>('0')
+    const refAmount = ref<number>(0)
 
     return () => (
       <MainLayout class={s.layout}>{{
