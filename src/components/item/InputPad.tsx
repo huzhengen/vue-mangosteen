@@ -6,11 +6,13 @@ import { DatetimePicker, NumberKeyboard, Popup } from 'vant';
 export const InputPad = defineComponent({
   props: {
     happenAt: String,
-    amount: Number
+    amount: Number,
+    onSubmit: {
+      type: Function as PropType<() => void>
+    }
   },
   emits: ['update:happenAt', 'update:amount'],
   setup: (props, context) => {
-    const now = new Date()
     const appendText = (n: number | string) => {
       const nString = n.toString()
       const dotIndex = refAmount.value.indexOf('.')
@@ -53,6 +55,7 @@ export const InputPad = defineComponent({
       {
         text: '提交', onClick: () => {
           context.emit('update:amount', parseFloat(refAmount.value) * 100)
+          props.onSubmit?.()
         }
       },
     ]
