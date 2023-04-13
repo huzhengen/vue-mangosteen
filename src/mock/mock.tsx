@@ -18,7 +18,7 @@ export const mockItemIndex: Mock = (config) => {
     Array.from({ length: n }).map(() => ({
       id: createId(),
       user_id: createId(),
-      amount: Math.floor(Math.random() * 10000),
+      amount: Math.floor(Math.random() * 100000),
       tags_id: [createId()],
       happen_at: faker.date.past().toISOString(),
       kind: config.params.kind,
