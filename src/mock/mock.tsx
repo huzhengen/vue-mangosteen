@@ -25,12 +25,12 @@ export const mockItemSummary: Mock = (config) => {
       200,
       {
         groups: [
-          { tag_id: 1, tag: { id: 1, name: '交通' }, amount: 100 },
-          { tag_id: 2, tag: { id: 2, name: '吃饭' }, amount: 300 },
-          { tag_id: 3, tag: { id: 3, name: '购物' }, amount: 200 },
-          { tag_id: 4, tag: { id: 4, name: '地铁' }, amount: 400 },
-          { tag_id: 5, tag: { id: 5, name: '电脑' }, amount: 500 },
-          { tag_id: 6, tag: { id: 3, name: '手机' }, amount: 600 }
+          { tag_id: 1, tag: { id: 1, name: '交通', sign: faker.internet.emoji() }, amount: 100 },
+          { tag_id: 2, tag: { id: 2, name: '吃饭', sign: faker.internet.emoji() }, amount: 300 },
+          { tag_id: 3, tag: { id: 3, name: '购物', sign: faker.internet.emoji() }, amount: 200 },
+          { tag_id: 1, tag: { id: 1, name: '地铁', sign: faker.internet.emoji() }, amount: 400 },
+          { tag_id: 2, tag: { id: 2, name: '电脑', sign: faker.internet.emoji() }, amount: 500 },
+          { tag_id: 3, tag: { id: 3, name: '手机', sign: faker.internet.emoji() }, amount: 600 }
         ],
         summary: 600
       }

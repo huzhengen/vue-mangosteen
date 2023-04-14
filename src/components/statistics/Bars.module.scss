@@ -1,5 +1,5 @@
 .wrapper {
-  margin-bottom: 128px;
+  margin-bottom: 16px;
 }
 .topItem {
   margin-top: 16px;
@@ -40,7 +40,7 @@
       top: 0;
       left: 0;
       height: 100%;
-      width: 42px;
+      width: 0;
     }
   }
   &:nth-child(1) {
@@ -56,6 +56,21 @@
   &:nth-child(3) {
     .bar_inner {
       background: #91cc75;
+    }
+  }
+  &:nth-child(4) {
+    .bar_inner {
+      background: #eb8334;
+    }
+  }
+  &:nth-child(5) {
+    .bar_inner {
+      background: #eb34e5;
+    }
+  }
+  &:nth-child(6) {
+    .bar_inner {
+      background: #34eb5f;
     }
   }
 }

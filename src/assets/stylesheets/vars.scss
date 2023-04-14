@@ -1,7 +1,8 @@
 :root {
   --amount-text: #53a867;
+  --app-name-text: #7878FF;
   --bg: white;
-  --button-bg-danger: #e10505;
+  --button-bg-danger: #E10505;
   --button-bg: #5c33be;
   --button-border-color: #ddd;
   --button-font-size: 18px;
@@ -12,7 +13,7 @@
   --dialog-header-text: white;
   --emoji-nav-text-selected: #333;
   --emoji-nav-text: #999;
-  --error-color: #e10505;
+  --error-color: #E10505;
   --float-button-bg: var(--button-bg);
   --float-button-text: white;
   --input-border-color: #5c33be;
@@ -34,12 +35,13 @@
   --overlay-user-bg: #5c33be;
   --overlay-user-text: white;
   --tabs-indicator-bg: rgba(255, 255, 255, 0.5);
-  --tag-bg: #efefef;
+  --tag-bg: #EFEFEF;
   --text: #333;
+  --text-muted: #666;
   --top-safe-area-height: 24px;
-  --total-bg: #252a43;
-  --total-expenses: #53a867;
-  --total-income: #fe7275;
+  --total-bg: #252A43;
+  --total-expenses: #53A867;
+  --total-income: #FE7275;
   --total-text: white;
   --transition-duration: 0.5s;
   --van-overlay-z-index: 64;
@@ -52,4 +54,5 @@
   --z-index-bottom-nav: 8;
   --z-index-navbar: 32;
   --z-index-overlay: 16;
+  --bar-bg: #CCCCCC;
 }
