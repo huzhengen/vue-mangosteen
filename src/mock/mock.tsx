@@ -5,17 +5,37 @@ type Mock = (config: AxiosRequestConfig) => [number, any]
 
 faker.setLocale('zh_CN');
 
-export const mockItemSummary: Mock = config => {
-  return [200, {
-    "groups": [
-      { "happen_at": "2023-04-18T00:00:00.000+0800", "amount": 100 },
-      { "happen_at": "2023-04-22T00:00:00.000+0800", "amount": 300 },
-      { "happen_at": "2023-04-23T00:00:00.000+0800", "amount": 200 },
-      { "happen_at": "2023-04-24T00:00:00.000+0800", "amount": 400 },
-      { "happen_at": "2023-04-25T00:00:00.000+0800", "amount": 300 },
-    ],
-    "summary": 600
-  }]
+export const mockItemSummary: Mock = (config) => {
+  if (config.params.group_by === 'happened_at') {
+    return [
+      200,
+      {
+        groups: [
+          { "happen_at": "2023-04-18T00:00:00.000+0800", "amount": 100 },
+          { "happen_at": "2023-04-22T00:00:00.000+0800", "amount": 300 },
+          { "happen_at": "2023-04-23T00:00:00.000+0800", "amount": 200 },
+          { "happen_at": "2023-04-24T00:00:00.000+0800", "amount": 400 },
+          { "happen_at": "2023-04-25T00:00:00.000+0800", "amount": 300 },
+        ],
+        summary: 600
+      }
+    ]
+  } else {
+    return [
+      200,
+      {
+        groups: [
+          { tag_id: 1, tag: { id: 1, name: '交通' }, amount: 100 },
+          { tag_id: 2, tag: { id: 2, name: '吃饭' }, amount: 300 },
+          { tag_id: 3, tag: { id: 3, name: '购物' }, amount: 200 },
+          { tag_id: 4, tag: { id: 4, name: '地铁' }, amount: 400 },
+          { tag_id: 5, tag: { id: 5, name: '电脑' }, amount: 500 },
+          { tag_id: 6, tag: { id: 3, name: '手机' }, amount: 600 }
+        ],
+        summary: 600
+      }
+    ]
+  }
 }
 
 export const mockItemIndexBalance: Mock = config => {
