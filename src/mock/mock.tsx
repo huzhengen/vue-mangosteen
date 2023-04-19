@@ -6,7 +6,8 @@ type Mock = (config: AxiosRequestConfig) => [number, any]
 faker.setLocale('zh_CN');
 
 export const mockItemSummary: Mock = (config) => {
-  if (config.params.group_by === 'happened_at') {
+  const { group_by, kind } = config.params
+  if (group_by === 'happened_at' && kind === 'expenses') {
     return [
       200,
       {
@@ -17,10 +18,24 @@ export const mockItemSummary: Mock = (config) => {
           { "happen_at": "2023-04-24T00:00:00.000+0800", "amount": 400 },
           { "happen_at": "2023-04-25T00:00:00.000+0800", "amount": 300 },
         ],
-        summary: 600
+        summary: 1300
       }
     ]
-  } else {
+  } else if (group_by === 'happened_at' && kind === 'income') {
+    return [
+      200,
+      {
+        groups: [
+          { "happen_at": "2023-04-01T00:00:00.000+0800", "amount": 100 },
+          { "happen_at": "2023-04-05T00:00:00.000+0800", "amount": 300 },
+          { "happen_at": "2023-04-10T00:00:00.000+0800", "amount": 200 },
+          { "happen_at": "2023-04-13T00:00:00.000+0800", "amount": 400 },
+          { "happen_at": "2023-04-15T00:00:00.000+0800", "amount": 300 },
+        ],
+        summary: 1300
+      }
+    ]
+  } else if (group_by === 'tag_id' && kind === 'expenses') {
     return [
       200,
       {
@@ -32,7 +47,22 @@ export const mockItemSummary: Mock = (config) => {
           { tag_id: 2, tag: { id: 2, name: '电脑', sign: faker.internet.emoji() }, amount: 500 },
           { tag_id: 3, tag: { id: 3, name: '手机', sign: faker.internet.emoji() }, amount: 600 }
         ],
-        summary: 600
+        summary: 2100
+      }
+    ]
+  } else {
+    return [
+      200,
+      {
+        groups: [
+          { tag_id: 1, tag: { id: 1, name: '收入1', sign: faker.internet.emoji() }, amount: 5000 },
+          { tag_id: 2, tag: { id: 2, name: '收入2', sign: faker.internet.emoji() }, amount: 2000 },
+          { tag_id: 3, tag: { id: 3, name: '收入3', sign: faker.internet.emoji() }, amount: 3000 },
+          { tag_id: 1, tag: { id: 1, name: '收入4', sign: faker.internet.emoji() }, amount: 4000 },
+          { tag_id: 2, tag: { id: 2, name: '收入5', sign: faker.internet.emoji() }, amount: 5000 },
+          { tag_id: 3, tag: { id: 3, name: '收入6', sign: faker.internet.emoji() }, amount: 6000 }
+        ],
+        summary: 25000
       }
     ]
   }
