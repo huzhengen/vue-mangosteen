@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { mockItemCreate, mockItemIndex, mockItemIndexBalance, mockItemSummary, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
+import { Toast } from "vant";
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
@@ -66,7 +67,26 @@ http.instance.interceptors.request.use(config => {
   if (jwt) {
     config.headers!.Authorization = `Bearer ${jwt}`
   }
+  if (config._autoLoading) {
+    Toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 0
+    })
+  }
   return config
+})
+
+http.instance.interceptors.response.use((response) => {
+  if (response.config._autoLoading) {
+    Toast.clear()
+  }
+  return response
+}, (error) => {
+  if (error.response.config._autoLoading) {
+    Toast.clear()
+  }
+  throw error
 })
 
 http.instance.interceptors.response.use((response) => {
