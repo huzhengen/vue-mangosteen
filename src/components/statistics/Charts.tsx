@@ -26,7 +26,7 @@ export const Charts = defineComponent({
     },
   },
   setup: (props, context) => {
-    const kind = ref('expenses')
+    const kind = ref('income')
     const data1 = ref<Data1>([])
     const betterData1 = computed<[string, number][]>(() => {
       if (!props.startDate || !props.endDate) { return [] }
@@ -93,8 +93,8 @@ export const Charts = defineComponent({
           label="类型"
           type="select"
           options={[
-            { value: 'expenses', text: '支出' },
             { value: 'income', text: '收入' },
+            { value: 'expenses', text: '支出' },
           ]}
           v-model={kind.value}
         />
