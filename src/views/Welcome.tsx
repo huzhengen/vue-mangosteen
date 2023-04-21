@@ -3,7 +3,6 @@ import { RouteLocationNormalizedLoaded, RouterView, useRouter, useRoute, } from 
 import { useSwipe } from '../hooks/useSwipe'
 import s from './Welcome.module.scss'
 import { throttle } from '../shared/throttle'
-import { Dialog } from 'vant'
 
 const pushMap: Record<string, string> = {
   Welcome1: '/welcome/2',
@@ -44,9 +43,9 @@ export const Welcome = defineComponent({
       <div class={s.wrapper}>
         <header>
           <svg>
-            <use xlinkHref="#mangosteen"></use>
+            <use xlinkHref="#pig"></use>
           </svg>
-          <h1>凤果记账</h1>
+          <h1>时空存钱罐</h1>
         </header>
         <main class={s.main} ref={main}>
           <RouterView name="main">
