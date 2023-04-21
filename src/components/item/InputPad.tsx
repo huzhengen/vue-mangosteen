@@ -2,7 +2,7 @@ import { defineComponent, PropType, ref } from 'vue';
 import { Icon } from '../../shared/Icon';
 import { Time } from '../../shared/time';
 import s from './InputPad.module.scss';
-import { DatetimePicker, NumberKeyboard, Popup } from 'vant';
+import { DatetimePicker, Popup } from 'vant';
 export const InputPad = defineComponent({
   props: {
     happenAt: String,
@@ -69,12 +69,13 @@ export const InputPad = defineComponent({
     const refAmount = ref(props.amount ? (props.amount / 100).toString() : '0')
     return () => <>
       <div class={s.dateAndAmount}>
-        <span class={s.date}>
+        <span class={s.date} onClick={showDatePicker}>
           <Icon name="date" class={s.icon} />
           <span>
-            <span onClick={showDatePicker}>{new Time(props.happenAt).format()}</span>
+            <span>{new Time(props.happenAt).format()}</span>
             <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
-              <DatetimePicker value={props.happenAt} type="date" title="选择年月日"
+              <DatetimePicker modelValue={props.happenAt ? new Date(props.happenAt) : new Date()}
+                type="date" title="选择年月日"
                 onConfirm={setDate} onCancel={hideDatePicker}
               />
             </Popup>
