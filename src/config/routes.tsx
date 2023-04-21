@@ -8,7 +8,6 @@ import { SecondActions } from '../components/welcome/SecondActions'
 import { Third } from '../components/welcome/Third'
 import { ThirdActions } from '../components/welcome/ThirdActions'
 import { Welcome } from '../views/Welcome'
-import { StartPage } from '../views/StartPage'
 import { ItemPage } from '../views/ItemPage'
 import { ItemList } from '../components/item/ItemList'
 import { ItemCreate } from '../components/item/ItemCreate'
@@ -26,7 +25,7 @@ export const routes: RouteRecordRaw[] = [
     component: Welcome,
     beforeEnter: (to, from, next) => {
       if (localStorage.getItem('skipFeatures') === "yes") {
-        next('/start')
+        next('/items')
       } else {
         next()
       }
@@ -39,7 +38,6 @@ export const routes: RouteRecordRaw[] = [
       { path: '4', name: 'Welcome4', components: { main: Fourth, footer: FourthActions }, },
     ],
   },
-  { path: '/start', component: StartPage },
   {
     path: '/items',
     component: ItemPage,

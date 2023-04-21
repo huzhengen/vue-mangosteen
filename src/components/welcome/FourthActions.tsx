@@ -7,8 +7,8 @@ export const FourthActions = () => {
   }
   return <div class={s.actions}>
     <SkipFeatures class={s.fake} />
-    <span onClick={onClick}><RouterLink to="/start">Start</RouterLink></span>
+    <span onClick={onClick}><RouterLink to="/items">Start</RouterLink></span>
     <SkipFeatures class={s.fake} />
   </div>
 }
-FourthActions.displayName = 'ThirdActions'
+FourthActions.displayName = 'FourthActions'

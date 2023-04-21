@@ -27,7 +27,7 @@ export const StartPage = defineComponent({
     return () => (
       <MainLayout>
         {{
-          title: () => '凤果记账',
+          title: () => '时空存钱罐',
           icon: () => <OverlayIcon />,
           default: () => (
             <>
