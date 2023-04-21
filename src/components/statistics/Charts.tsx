@@ -48,6 +48,7 @@ export const Charts = defineComponent({
         kind: kind.value,
         group_by: 'happened_at',
       }, {
+        _autoLoading: true,
         _mock: 'itemSummary',
       })
       data1.value = response.data.groups
