@@ -102,7 +102,7 @@ export const FormItem = defineComponent({
                 class={[s.formItem, s.button, s.validationCodeButton]}
                 onClick={props.onClick}
               >
-                {isCounting.value ? `${count.value} s` : "Send code"}
+                {isCounting.value ? `${count.value} s` : "发送验证码"}
               </Button>
             </>
           )

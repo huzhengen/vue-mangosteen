@@ -13,7 +13,7 @@ import s from './SignInPage.module.scss';
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const formData = reactive({
-      email: 'test@test.com',
+      email: 'sk@sk.com',
       code: '123456'
     })
     const errors = reactive({
@@ -73,10 +73,11 @@ export const SignInPage = defineComponent({
                 <h1 class={s.appName}>时空存钱罐</h1>
               </div>
               <Form onSubmit={onSubmit}>
-                <FormItem label="邮箱地址" type="text"
+                <FormItem label="邮箱地址(测试邮箱：sk@sk.com)" type="text"
                   placeholder='请输入邮箱，然后点击发送验证码'
                   v-model={formData.email} error={errors.email?.[0]} />
-                <FormItem ref={refValidationCode} label="验证码" type="validationCode"
+                <FormItem ref={refValidationCode} label="验证码(测试验证码：123456)"
+                  type="validationCode"
                   placeholder='请输入六位数字'
                   countFrom={1}
                   disabled={refDisabled.value}
