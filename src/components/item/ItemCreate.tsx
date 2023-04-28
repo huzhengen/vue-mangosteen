@@ -18,7 +18,7 @@ export const ItemCreate = defineComponent({
   setup: (props, context) => {
     const formData = reactive<Partial<Item>>({
       kind: 'income',
-      tags_id: [],
+      tag_ids: [],
       amount: 0,
       happen_at: new Date().toISOString(),
     })
@@ -46,10 +46,10 @@ export const ItemCreate = defineComponent({
           <div class={s.wrapper}>
             <Tabs v-model:selected={formData.kind} class={s.tabs}>
               <Tab value="income" name="收入">
-                <Tags kind='income' v-model:selected={formData.tags_id![0]} />
+                <Tags kind='income' v-model:selected={formData.tag_ids![0]} />
               </Tab>
               <Tab value="expenses" name="支出">
-                <Tags kind='expenses' v-model:selected={formData.tags_id![0]} />
+                <Tags kind='expenses' v-model:selected={formData.tag_ids![0]} />
               </Tab>
             </Tabs>
             <div class={s.inputPad_wrapper}>
