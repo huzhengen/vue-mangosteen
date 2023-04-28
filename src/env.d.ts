@@ -44,3 +44,5 @@ type Resource<T> = {
 type ResourceError = {
   errors: Record<string, string[]>
 }
+
+type FormErrors<T> = { [K in keyof typeof T]: string[] }
