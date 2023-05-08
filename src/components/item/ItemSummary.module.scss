@@ -86,8 +86,8 @@
 }
 
 .pig {
-  width: 128px;
-  height: 128px;
+  width: 128px !important;
+  height: 128px !important;
 
   &_wrapper {
     padding: 120px 0;

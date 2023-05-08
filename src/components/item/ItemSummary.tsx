@@ -24,7 +24,7 @@ export const ItemSummary = defineComponent({
     if (!props.startDate || !props.endDate) {
       return () => <div>请先选择时间范围</div>
     }
-    const itemStore = useItemStore()
+    const itemStore = useItemStore(['items', props.startDate, props.endDate])
     useAfterMe(() => itemStore.fetchItems(props.startDate, props.endDate))
     watch(() => [props.startDate, props.endDate], () => {
       itemStore.reset()
