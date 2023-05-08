@@ -9,7 +9,9 @@ type ItemState = {
 
 type ItemActions = {
   reset: () => void
+  _fetch: (firstPage: boolean, startDate?: string, endDate?: string) => void
   fetchItems: (startDate?: string, endDate?: string) => void
+  fetchNextPage: (startDate?: string, endDate?: string) => void
 }
 
 export const useItemStore = (id: string | string[]) =>
@@ -17,7 +19,7 @@ export const useItemStore = (id: string | string[]) =>
     state: () => ({
       items: [],
       hasMore: false,
-      page: 0,
+      page: 0
     }),
     actions: {
       reset() {
@@ -25,20 +27,36 @@ export const useItemStore = (id: string | string[]) =>
         this.hasMore = false
         this.page = 0
       },
-      async fetchItems(startDate, endDate) {
-        if (!startDate || !endDate) { return }
-        const response = await http.get<Resources<Item>>('/items', {
-          happen_after: startDate,
-          happen_before: endDate,
-          page: this.page + 1,
-        }, {
-          _autoLoading: true,
-          _mock: 'itemIndex',
-        })
+      async _fetch(firstPage, startDate, endDate) {
+        if (!startDate || !endDate) {
+          return
+        }
+        const response = await http.get<Resources<Item>>(
+          '/items',
+          {
+            happen_after: startDate,
+            happen_before: endDate,
+            page: firstPage ? 1 : this.page + 1
+          },
+          {
+            _mock: 'itemIndex',
+            _autoLoading: true
+          }
+        )
         const { resources, pager } = response.data
-        this.items.push(...resources)
+        if (firstPage) {
+          this.items = resources
+        } else {
+          this.items.push(...resources)
+        }
         this.hasMore = (pager.page - 1) * pager.per_page + resources.length < pager.count
         this.page += 1
+      },
+      async fetchNextPage(startDate, endDate) {
+        this._fetch(false, startDate, endDate)
+      },
+      async fetchItems(startDate, endDate) {
+        this._fetch(true, startDate, endDate)
       }
-    },
+    }
   })()
