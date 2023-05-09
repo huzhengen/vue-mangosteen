@@ -56,3 +56,8 @@ curl
 curl  -v  -XPOST -H "Content-Type:application/json"  http://123.45.67.89:3000/api/v1/validation_codes  -d  ' {"email" : "xxx@xxx.com"} '
 
 ```
+
+查看 docker 日志
+```
+docker logs [OPTIONS] CONTAINER
+```
