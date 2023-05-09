@@ -47,8 +47,6 @@ export const EmojiSelect = defineComponent({
         [
           'person',
           'person-gesture',
-          'person-role',
-          'person-fantasy',
           'person-activity',
           'person-sport',
           'person-resting',
