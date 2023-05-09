@@ -1,3 +1,7 @@
+# vue-mangosteen
+
+> 部署的时候，要先修改 bin/deploy.sh 里的 ip，确定是自己`前端`服务器的 IP；还要修改 Http.tsx 里的 IP，确定请求的接口是自己`后端`服务器的 IP。
+
 初始化项目，使用 Vue3 和 TSX
 
 ```

@@ -1,6 +1,6 @@
 # 注意修改 user 和 ip
 user=ubuntu
-ip=111.11.11.11
+ip=1.1.1.1
 
 time=$(date +'%Y%m%d-%H%M%S')
 cache_dir=tmp/deploy_cache
