@@ -7,3 +7,5 @@ export const ItemList = defineComponent({
     return () => <TimeTabsLayout component={ItemSummary} />
   },
 })
+
+export default ItemList

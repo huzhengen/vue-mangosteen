@@ -8,3 +8,5 @@ export const StatisticsPage = defineComponent({
       hideThisYear={true} component={Charts} />
   },
 })
+
+export default StatisticsPage
