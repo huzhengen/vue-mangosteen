@@ -1,5 +1,6 @@
 # 注意修改 user 和 ip
 user=ubuntu
+# 前端服务器 IP 
 ip=1.1.1.1
 
 time=$(date +'%Y%m%d-%H%M%S')
