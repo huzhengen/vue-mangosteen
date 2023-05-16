@@ -5,9 +5,7 @@ export const Fourth = () => (
       <use xlinkHref="#cloud"></use>
     </svg>
     <h2>
-      云备份
-      <br />
-      再也不怕数据丢失
+      数据同步不怕丢
     </h2>
   </div>
 )

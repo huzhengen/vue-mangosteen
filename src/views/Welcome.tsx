@@ -5,8 +5,7 @@ import s from './Welcome.module.scss'
 import { throttle } from '../shared/throttle'
 
 const pushMap: Record<string, string> = {
-  Welcome1: '/welcome/2',
-  Welcome2: '/welcome/3',
+  Welcome1: '/welcome/3',
   Welcome3: '/welcome/4',
   Welcome4: '/items',
 }
@@ -27,16 +26,6 @@ export const Welcome = defineComponent({
       if (swiping.value && direction.value === 'left') {
         replace()
       }
-    })
-
-    onMounted(() => {
-      // if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-      //   Dialog.alert({
-      //     message: '建议使用手机打开该应用。',
-      //   }).then(() => {
-      //     // on close
-      //   })
-      // }
     })
 
     return () => (

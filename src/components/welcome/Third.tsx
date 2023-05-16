@@ -5,9 +5,7 @@ export const Third = () => (
       <use xlinkHref="#chart"></use>
     </svg>
     <h2>
-      数据可视化
-      <br />
-      收支一目了然
+      收支数据可视化
     </h2>
   </div>
 )
