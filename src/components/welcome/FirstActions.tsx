@@ -4,7 +4,7 @@ import { SkipFeatures } from '../../shared/SkipFeatures'
 export const FirstActions = () => (
   <div class={s.actions}>
     <SkipFeatures class={s.fake} />
-    <RouterLink to="/welcome/2">Next</RouterLink>
+    <RouterLink to="/welcome/3">下一步</RouterLink>
     <SkipFeatures />
   </div>
 )

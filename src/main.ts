@@ -6,6 +6,7 @@ import { history } from './shared/history'
 import '@svgstore'
 import { createPinia } from 'pinia'
 import { useMeStore } from './stors/useMeStore'
+import { Dialog } from 'vant'
 
 const router = createRouter({ history, routes })
 const pinia = createPinia()
@@ -40,3 +41,14 @@ router.beforeEach((to, from) => {
     () => '/sign_in?return_to=' + from.path
   )
 })
+
+if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  const hasAlerted = localStorage.getItem('hasAlerted')
+  if (hasAlerted !== 'yes') {
+    Dialog.alert({
+      message: '建议使用手机浏览该应用',
+    }).then(() => {
+      localStorage.setItem('hasAlerted', 'yes')
+    })
+  }
+}

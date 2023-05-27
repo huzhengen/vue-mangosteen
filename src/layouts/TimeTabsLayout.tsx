@@ -6,6 +6,7 @@ import { Time } from '../shared/time'
 import s from './TimeTabsLayout.module.scss'
 import { Overlay } from 'vant'
 import { OverlayIcon } from '../shared/Overlay'
+import { FloatButton } from '../shared/FloatButton'
 
 const c = defineComponent({
   props: {
