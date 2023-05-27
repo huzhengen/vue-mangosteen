@@ -1,0 +1,1 @@
+import{bD as r,bW as s,bX as c,bE as u}from"./vendor.619c3c28.js";import{I as a}from"./Icon.583548dc.js";const b=r({setup:(p,i)=>{const e=s(),o=c(),n=()=>{const{return_to:t}=e.query;t?o.push(t.toString()):o.back()};return()=>u(a,{name:"left",onClick:n},null)}});export{b as B};
