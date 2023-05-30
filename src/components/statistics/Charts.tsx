@@ -9,7 +9,7 @@ import { Time } from '../../shared/time'
 
 const DAY = 24 * 3600 * 1000
 
-type Data1Item = { happened_at: string, amount: number }
+type Data1Item = { happen_at: string, amount: number }
 type Data1 = Data1Item[]
 type Data2Item = { tag_id: number; tag: Tag; amount: number }
 type Data2 = Data2Item[]
@@ -35,7 +35,7 @@ export const Charts = defineComponent({
       return Array.from({ length: n }).map((_, i) => {
         const time = new Time(props.startDate + 'T00:00:00.000+0800').add(i, 'day').getTimestamp()
         const item = data1.value[0]
-        const amount = (item && new Date(item.happened_at + 'T00:00:00.000+0800').getTime() === time)
+        const amount = (item && new Date(item.happen_at + 'T00:00:00.000+0800').getTime() === time)
           ? data1.value.shift()!.amount
           : 0
         return [new Date(time).toISOString(), amount]
@@ -46,7 +46,7 @@ export const Charts = defineComponent({
         happen_after: props.startDate,
         happen_before: props.endDate,
         kind: kind.value,
-        group_by: 'happened_at',
+        group_by: 'happen_at',
       }, {
         _autoLoading: true,
         _mock: 'itemSummary',
@@ -55,6 +55,8 @@ export const Charts = defineComponent({
     }
     onMounted(fetchData1)
     watch(() => kind.value, fetchData1)
+    watch(() => props.startDate, fetchData1)
+    watch(() => props.endDate, fetchData1)
 
     // PieChart
     const data2 = ref<Data2>([])
@@ -77,6 +79,8 @@ export const Charts = defineComponent({
     }
     onMounted(fetchData2)
     watch(() => kind.value, fetchData2)
+    watch(() => props.startDate, fetchData2)
+    watch(() => props.endDate, fetchData2)
 
     // Bars
     const betterData3 = computed<{ tag: Tag, amount: number, percent: number }[]>(() => {

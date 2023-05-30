@@ -132,7 +132,7 @@ export const FormItem = defineComponent({
                 }}
                 class={[s.formItem, s.input]}
               />
-              <Popup position="bottom" v-model:show={refDateVisible.value}>
+              <Popup position="bottom" v-model:show={refDateVisible.value} close-on-click-overlay={false}>
                 <DatetimePicker
                   modelValue={props.modelValue ? new Date(props.modelValue) : new Date()}
                   type="date"

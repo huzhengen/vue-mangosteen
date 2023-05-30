@@ -7,7 +7,7 @@ faker.setLocale('zh_CN');
 
 export const mockItemSummary: Mock = (config) => {
   const { group_by, kind } = config.params
-  if (group_by === 'happened_at' && kind === 'expenses') {
+  if (group_by === 'happen_at' && kind === 'expenses') {
     return [
       200,
       {
@@ -21,7 +21,7 @@ export const mockItemSummary: Mock = (config) => {
         summary: 1300
       }
     ]
-  } else if (group_by === 'happened_at' && kind === 'income') {
+  } else if (group_by === 'happen_at' && kind === 'income') {
     return [
       200,
       {

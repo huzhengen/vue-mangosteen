@@ -73,7 +73,7 @@ export const TimeTabsLayout = defineComponent({
     return () => (
       <MainLayout>
         {{
-          title: () => '我的存钱罐',
+          title: () => props.hideThisYear ? '统计图表' : '我的存钱罐',
           icon: () => <OverlayIcon />,
           default: () => (
             <>
